@@ -37,12 +37,12 @@ describe('error codes transform', () => {
     compare(
       "import invariant from 'shared/invariant';\n" +
         "invariant(condition, 'Do not override existing functions.');",
-      "import _prodInvariant from 'shared/reactProdInvariant';\n" +
+      'import _prodInvariant from "shared/reactProdInvariant";\n' +
         "import invariant from 'shared/invariant';\n" +
         '!condition ? ' +
         '__DEV__ ? ' +
-        "invariant(false, 'Do not override existing functions.') : " +
-        `_prodInvariant('16') : void 0;`
+        'invariant(false, "Do not override existing functions.") : ' +
+        `_prodInvariant("16") : void 0;`
     );
   });
 
@@ -50,14 +50,14 @@ describe('error codes transform', () => {
     const expectedInvariantTransformResult =
       '!condition ? ' +
       '__DEV__ ? ' +
-      "invariant(false, 'Do not override existing functions.') : " +
-      `_prodInvariant('16') : void 0;`;
+      'invariant(false, "Do not override existing functions.") : ' +
+      `_prodInvariant("16") : void 0;`;
 
     compare(
       `import invariant from 'shared/invariant';
 invariant(condition, 'Do not override existing functions.');
 invariant(condition, 'Do not override existing functions.');`,
-      `import _prodInvariant from 'shared/reactProdInvariant';
+      `import _prodInvariant from "shared/reactProdInvariant";
 import invariant from 'shared/invariant';
 ${expectedInvariantTransformResult}
 ${expectedInvariantTransformResult}`
@@ -68,12 +68,12 @@ ${expectedInvariantTransformResult}`
     compare(
       "import invariant from 'shared/invariant';\n" +
         "invariant(condition, 'Expected %s target to be an array; got %s', 'foo', 'bar');",
-      "import _prodInvariant from 'shared/reactProdInvariant';\n" +
+      'import _prodInvariant from "shared/reactProdInvariant";\n' +
         "import invariant from 'shared/invariant';\n" +
         '!condition ? ' +
         '__DEV__ ? ' +
-        "invariant(false, 'Expected %s target to be an array; got %s', 'foo', 'bar') : " +
-        `_prodInvariant('7', 'foo', 'bar') : void 0;`
+        "invariant(false, \"Expected %s target to be an array; got %s\", 'foo', 'bar') : " +
+        `_prodInvariant("7", 'foo', 'bar') : void 0;`
     );
   });
 
@@ -81,12 +81,12 @@ ${expectedInvariantTransformResult}`
     compare(
       "import invariant from 'shared/invariant';\n" +
         "invariant(condition, 'Expected a component class, ' + 'got %s.' + '%s', 'Foo', 'Bar');",
-      "import _prodInvariant from 'shared/reactProdInvariant';\n" +
+      'import _prodInvariant from "shared/reactProdInvariant";\n' +
         "import invariant from 'shared/invariant';\n" +
         '!condition ? ' +
         '__DEV__ ? ' +
-        "invariant(false, 'Expected a component class, got %s.%s', 'Foo', 'Bar') : " +
-        `_prodInvariant('18', 'Foo', 'Bar') : void 0;`
+        "invariant(false, \"Expected a component class, got %s.%s\", 'Foo', 'Bar') : " +
+        `_prodInvariant("18", 'Foo', 'Bar') : void 0;`
     );
   });
 
@@ -94,9 +94,9 @@ ${expectedInvariantTransformResult}`
     compare(
       "import invariant from 'shared/invariant';\n" +
         "invariant(condition, 'This is not a real error message.');",
-      "import _prodInvariant from 'shared/reactProdInvariant';\n" +
+      'import _prodInvariant from "shared/reactProdInvariant";\n' +
         "import invariant from 'shared/invariant';\n" +
-        "!condition ? invariant(false, 'This is not a real error message.') : void 0;"
+        '!condition ? invariant(false, "This is not a real error message.") : void 0;'
     );
   });
 });
